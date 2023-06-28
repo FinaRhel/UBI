@@ -1,16 +1,15 @@
-// @flow
 import * as React from 'react';
 
 type Props = {
 
 };
 
-export function AboutPage(props: Props) {
+const MainPage = (props: Props) => {
     return (
         <div>
-            Hello
+            Main
         </div>
     );
 };
 
-export default React.memo(AboutPage);
+export default MainPage;
