@@ -11,6 +11,6 @@ function AboutPage(props: Props) {
             Hello
         </div>
     );
-};
+}
 
 export default React.memo(AboutPage);
