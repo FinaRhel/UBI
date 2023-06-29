@@ -1,12 +1,23 @@
 import webpack from "webpack";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import {BuildOptions} from "./types/config";
+import ReactRefreshTypeScript from "react-refresh-typescript";
 
 export default function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
     const typeScriptLoader = {
         test: /\.tsx?$/,
-        use: 'ts-loader',
         exclude: /node_modules/,
+        use: [
+            {
+                loader: 'ts-loader',
+                options: {
+                    getCustomTransformers: () => ({
+                        before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
+                    }),
+                    transpileOnly: isDev,
+                },
+            },
+        ],
     };
 
     const cssLoader = {
