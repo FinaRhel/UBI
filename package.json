@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest  --config ./config/jest/jest.config.ts",
+    "test": "jest --config ./config/jest/jest.config.ts",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
     "start": "webpack serve --env port=3000",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss:fix": "stylelint \"**/*.scss\" --fix",
-    "lint:scss": "stylelint \"**/*.scss\""
+    "lint:scss": "stylelint \"**/*.scss\"",
+    "precommit": "npm run lint:ts || npm run lint:scss"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +37,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^7.0.0",
     "jest": "^27.5.1",
     "mini-css-extract-plugin": "^2.5.3",
     "react-refresh": "^0.14.0",
