@@ -12,7 +12,7 @@
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss:fix": "stylelint \"**/*.scss\" --fix",
     "lint:scss": "stylelint \"**/*.scss\"",
-    "precommit": "npm run lint:ts || npm run lint:scss"
+    "precommit": "npm run lint:ts && npm run lint:scss"
   },
   "keywords": [],
   "author": "",
