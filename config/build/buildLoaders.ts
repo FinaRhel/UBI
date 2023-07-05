@@ -4,20 +4,30 @@ import ReactRefreshTypeScript from 'react-refresh-typescript';
 import { BuildOptions } from './types/config';
 
 export default function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRule[] {
-    const typeScriptLoader = {
+    const typescriptLoader = {
         test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: [
-            {
-                loader: 'ts-loader',
-                options: {
-                    getCustomTransformers: () => ({
-                        before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
-                    }),
-                    transpileOnly: isDev,
-                },
+    };
+
+    const babelLoader = {
+        test: /\.(js|jsx|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+            loader: 'babel-loader',
+            options: {
+                presets: ['@babel/preset-env'],
+                plugins: [
+                    [
+                        'i18next-extract',
+                        {
+                            locales: ['ru', 'en'],
+                            keyAsDefaultValue: true,
+                        },
+                    ],
+                ],
             },
-        ],
+        },
     };
 
     const cssLoader = {
@@ -55,9 +65,10 @@ export default function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRu
     };
 
     return [
-        typeScriptLoader,
-        cssLoader,
         svgLoader,
         fileLoader,
+        babelLoader,
+        typescriptLoader,
+        cssLoader,
     ];
 }

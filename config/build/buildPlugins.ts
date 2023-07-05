@@ -2,6 +2,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 function buildPlugins(path: string, isDev: boolean): webpack.WebpackPluginInstance[] {
     return [
@@ -13,10 +14,11 @@ function buildPlugins(path: string, isDev: boolean): webpack.WebpackPluginInstan
             filename: 'css/[name].[contenthash:8].css',
         }),
         new webpack.DefinePlugin({
-            __IS_DEV__: JSON.stringify(isDev),
+            __IS_DEV__: isDev,
         }),
         new webpack.HotModuleReplacementPlugin(),
         ...isDev ? [new ReactRefreshWebpackPlugin()] : null,
+        new BundleAnalyzerPlugin({ openAnalyzer: false }),
     ];
 }
 
