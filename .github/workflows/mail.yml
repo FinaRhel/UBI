@@ -6,10 +6,11 @@ on:
     branches: [main]
 jobs:
   pipeline:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
+        os: [ windows-2019 ]
         node-version: [ 17.x ]
+    runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v2
@@ -22,9 +23,18 @@ jobs:
       - name: build project
         run: npm run build:prod
       - name: linting ts
+        if: always()
         run: npm run lint:ts
       - name: linting scss
+        if: always()
         run: npm run lint:scss
       - name: unit test
+        if: always()
         run: npm run test:unit
+      - name: storybook build
+        if: always()
+        run: npm run storybook:build
+      - name: screenshot test
+        if: always()
+        run: npm run test:ui:ci
 

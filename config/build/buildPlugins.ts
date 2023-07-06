@@ -18,7 +18,7 @@ function buildPlugins(path: string, isDev: boolean): webpack.WebpackPluginInstan
         }),
         ...isDev ? [new ReactRefreshWebpackPlugin()] : [],
         ...isDev ? [new webpack.HotModuleReplacementPlugin()] : [],
-        new BundleAnalyzerPlugin({ openAnalyzer: false }),
+        ...isDev ? [new BundleAnalyzerPlugin({ openAnalyzer: false })] : [],
     ];
 }
 
