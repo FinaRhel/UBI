@@ -19,6 +19,7 @@ function App() {
                     <AppRouter />
                 </div>
             </Suspense>
+            <div id="portal" />
         </div>
     );
 }

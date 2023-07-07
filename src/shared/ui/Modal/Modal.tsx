@@ -8,6 +8,7 @@ import cls from './Modal.module.scss';
 
 interface ModalProps {
     className?: string;
+    portalId?: string;
     children?: ReactNode;
     isOpen?: boolean;
     onClose?: () => void;
@@ -21,6 +22,7 @@ export const Modal = (props: ModalProps) => {
         children,
         isOpen,
         onClose,
+        portalId,
     } = props;
 
     const [isClosing, setIsClosing] = useState(false);
@@ -66,7 +68,7 @@ export const Modal = (props: ModalProps) => {
     };
 
     return (
-        <Portal>
+        <Portal portalId={portalId}>
             <div className={classNames(cls.Modal, mods, [className])}>
                 <div role="presentation" className={cls.overlay} onClick={closeHandler}>
                     <div
