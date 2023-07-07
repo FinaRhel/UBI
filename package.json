@@ -17,7 +17,7 @@
     "precommit": "npm run lint:ts && npm run lint:scss",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
     "storybook:build": "storybook build -c ./config/storybook",
-    "test:ui:ci": "concurrently --kill-others --raw --success first 'npm run storybook' 'npm run test:ui' 'deelay'"
+    "test:ui:ci": "concurrently --kill-others --raw --success first \"npm run storybook\" \"npm run test:ui\" \"deelay\""
   },
   "keywords": [],
   "author": "",
@@ -51,6 +51,7 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-i18next-extract": "^0.8.3",
     "css-loader": "^6.6.0",
+    "deelay": "^2.0.0",
     "eslint": "^8.10.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-i18next": "^5.1.2",
