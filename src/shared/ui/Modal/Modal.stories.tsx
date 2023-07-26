@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Modal } from 'shared/ui/Modal/Modal';
-import { themeDecorator } from 'shared/config/storybook/themeDecorator/themeDecorator';
+import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'app/providers/ThemeProvider';
 
 export default {
@@ -27,4 +27,4 @@ Dark.args = {
     children: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid commodi '
         + 'consequatur eligendi impedit incidunt necessitatibus possimus quis saepe sunt totam.\n ',
 };
-Dark.decorators = [themeDecorator(Theme.DARK)];
+Dark.decorators = [ThemeDecorator(Theme.DARK)];
