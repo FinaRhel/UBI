@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "module": "ESNext",
     "baseUrl": ".",
+    "strict": true,
     "paths": {
       "*": ["./src/*"]
     }
