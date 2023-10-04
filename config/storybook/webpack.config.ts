@@ -14,7 +14,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
     config.resolve.extensions.push('.ts', '.tsx');
 
     // eslint-disable-next-line no-param-reassign
-    config.module.rules = config.module.rules.map((rule: webpack.RuleSetRule) => {
+    config!.module!.rules = config!.module!.rules!.map((rule: webpack.RuleSetRule) => {
         // @ts-ignore
         if (rule.test && rule.test.test('.svg')) {
             return { ...rule, exclude: /\.svg$/ };
@@ -22,13 +22,13 @@ export default ({ config }: { config: webpack.Configuration }) => {
 
         return rule;
     });
-    config.module.rules.push(buildCssLoaders(true));
-    config.module.rules.push({
+    config!.module!.rules.push(buildCssLoaders(true));
+    config!.module!.rules.push({
         test: /\.svg$/,
         enforce: 'pre',
         loader: require.resolve('@svgr/webpack'),
     });
-    config.plugins.push(
+    config!.plugins!.push(
         new webpack.DefinePlugin({
             __IS_DEV__: true,
             __API__: JSON.stringify(''),
