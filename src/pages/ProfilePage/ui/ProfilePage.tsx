@@ -11,12 +11,13 @@ import {
     fetchProfileData,
     getProfileError,
     getProfileForm,
-    getProfileIsLoading, getProfileReadOnly,
+    getProfileIsLoading, getProfileReadOnly, getProfileValidateErrors,
     profileActions,
     ProfileCard,
     profileReducer,
 } from 'entities/Profile';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 
 const reducers: ReducersList = {
     profile: profileReducer,
@@ -26,15 +27,17 @@ interface ProfilePageProps {
     className?: string;
 }
 
+const isStorybook = __PROJECT__ === 'storybook';
 const ProfilePage = ({ className }: ProfilePageProps) => {
     const dispatch = useAppDispatch();
     const formData = useSelector(getProfileForm);
     const error = useSelector(getProfileError);
     const isLoading = useSelector(getProfileIsLoading);
     const readonly = useSelector(getProfileReadOnly);
+    const validateErrors = useSelector(getProfileValidateErrors);
 
     useEffect(() => {
-        dispatch(fetchProfileData())
+        !isStorybook && dispatch(fetchProfileData())
     }, [dispatch]);
 
     const onChangeFirstName = useCallback((value?: string) => {
@@ -73,6 +76,15 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
             <div className={classNames('', {}, [className])}>
                 <ProfilePageHeader />
+                {validateErrors?.length && validateErrors.map((error) => {
+                    return (
+                        <Text
+                            key={error}
+                            theme={TextTheme.ERROR}
+                            text={error}
+                        />
+                    )
+                })}
                 <ProfileCard
                     data={formData}
                     isLoading={isLoading}
