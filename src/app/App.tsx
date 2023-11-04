@@ -1,6 +1,6 @@
 import './styles/index.scss';
-import { userActions } from 'entities/User';
-import { useDispatch } from 'react-redux';
+import {getUserInited, userActions} from 'entities/User';
+import {useDispatch, useSelector} from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 
 import { AppRouter } from 'app/providers/router';
@@ -10,6 +10,7 @@ import { Suspense, useEffect } from 'react';
 
 function App() {
     const dispatch = useDispatch();
+    const inited = useSelector(getUserInited);
 
     useEffect(() => {
         dispatch(userActions.initAuthData());
@@ -21,7 +22,7 @@ function App() {
                 <Navbar />
                 <div className="content-page">
                     <Sidebar />
-                    <AppRouter />
+                    {inited && <AppRouter />}
                 </div>
             </Suspense>
             <div id="portal" />
